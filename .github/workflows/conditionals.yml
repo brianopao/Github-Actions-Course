@@ -1,0 +1,15 @@
+name: Conditional Workflow
+on: [push]
+
+jobs:
+    conditional-job:
+        if: github.repository == 'brianopao/Github-Actions-Course'
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Hello World"
+              run: echo "Hello World"
+    goodbye-moon:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Goodbye Moon"
+              run: echo "Goodbye Moon"

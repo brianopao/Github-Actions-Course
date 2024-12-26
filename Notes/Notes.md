@@ -155,3 +155,35 @@ When you **make the request to the webhook** you must:
 - Set the Accept type for application/vnd.github+json
 - Provide Authorization to your Personal Access Token
 - Pass the event type "webhook"
+
+### Conditional Keyword for Steps
+
+jobs.<job_id>.if conditional can be used to **prevent a job from running unless a condition is met.**
+
+For Example:
+
+```yml
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    production-deploy:
+        if: github.repository == 'brianopao/Github-Actions-Course'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                node-version: '14'
+            - run: npm install -g bats
+```
+
+**Note:** You must always use the ${{ }} expression syntax or escape with ","", or () when the expression starts with a !, since ! is a special character in YAML
+
+For Example:
+
+```yml
+if: ${{ ! startsWith(github.ref, 'refs/tags/v') }}
+```
