@@ -106,3 +106,16 @@ jobs:
         - uses: actions/checkout@v2
         - name: Set up Python
 ```
+
+### Manual Events
+
+Workflows can be triggered manually through Github UI, GitHub CLI, or GitHub REST API
+
+```
+gh workflow run greet.yml \
+-f name=brian \
+-f greeting=hello \
+-F data=@myfile.txt
+``` 
+
+a `workflow_dispatch:` and `inputs:` event must be added to run manually
