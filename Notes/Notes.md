@@ -119,3 +119,39 @@ gh workflow run greet.yml \
 ``` 
 
 a `workflow_dispatch:` and `inputs:` event must be added to run manually
+
+
+### Webhook Events
+
+Many of the listed GitHub Workflow Triggers are triggered by a **webhook**
+
+Most of these webhooks will be triggered within GitHUb when users are interacting with GitHub which will in turn will trigger API actions. Users generally don't have to directly call the API to trigger the workflow
+
+Using `repository_dispatch` with **webhook** type you can trigger the Workflow via an external HTTP endpoint.
+- will only trigger a workflow run if the workflow file is on the default branch
+
+For example:
+
+```yml
+name: Workflow on Respository Dispatch
+
+on: 
+    repository_dispatch:
+        types:
+            - webhook
+
+jobs:
+    respond-to-dispatch:
+        runs-on: unbuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
+            - name: Run a script
+              run: echo "Event of type ${GITHUB_EVENT_NAME}"
+```
+
+When you **make the request to the webhook** you must:
+- Send a POST request to the repo's dispatches endpoint
+- Set the Accept type for application/vnd.github+json
+- Provide Authorization to your Personal Access Token
+- Pass the event type "webhook"
