@@ -57,3 +57,52 @@ jobs:
             run: echo "This step will always run"
 ```
 
+## Triggering Single or Multiple Events
+
+### Single Event
+
+For example on **Push**
+
+```yml
+name: CI on Push
+
+on: 
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Run a one-line script
+              run: echo "Hello world!"
+```
+
+### Multiple Events
+
+For example on **Push, Pull, Request, Release**
+
+Note: If you specify multiple events, only one of those events needs to occur to trigger your workflow. If multiple triggering events for your workflow occur at the same time, multiple workflow runs will be triggered
+
+```yml
+name: CI on Multiple Events
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+    release:
+        types: [published, created]
+
+jobs:
+    build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - name: Set up Python
+```
