@@ -187,3 +187,33 @@ For Example:
 ```yml
 if: ${{ ! startsWith(github.ref, 'refs/tags/v') }}
 ```
+
+
+### Expressions
+
+#### Functions
+- `contains` : Check if a string contains another string
+- - example: `if: contains(github.event.head_commit.message, 'skip ci')`
+- `endsWith` : Check if a string ends with another string
+- - example: `if: endsWith(github.event.head_commit.message, 'skip ci')`
+- `startsWith` : Check if a string starts with another string
+- - example: `if: startsWith(github.event.head_commit.message, 'skip ci')`
+- `format` : Format a string using a format string
+- - example: `if: format('refs/heads/{0}', github.ref) == 'refs/heads/main'`
+- `join` : Join a list of strings into a single string
+- - example: `if: join(github.event.labels.*.name, ',') == 'bug,enhancement'`
+- `toJson` : Convert a value to a JSON string
+- - example: `if: toJson(github.event) == '{"key": "value"}'`
+- `fromJson` : Convert a JSON string to a value
+- - example: `if: fromJson('{"key": "value"}').key == 'value'`
+- `hashFiles` : Compute the hash of files
+- - example: `if: hashFiles('**/*.js') == '123456'`
+
+#### Status Check Functions
+- `always` : Always true
+- `cancelled` : Always false
+- `failure` : True if the previous step failed
+- `success` : True if the previous step succeeded
+- `skipped` : True if the previous step was skipped
+- `timedout` : True if the previous step timed out
+- `neutral` : True if the previous step was neutral
