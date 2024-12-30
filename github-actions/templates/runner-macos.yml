@@ -27,4 +27,3 @@ jobs:
       - name: Compile and run Swift program
         run: |
           swiftc hello.swift
-          ./hello

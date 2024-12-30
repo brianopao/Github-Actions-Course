@@ -260,3 +260,21 @@ runs-on: self-hosted
 - Any OS, any hardware
 - Potentially more secure, but you are responsible for security
 - Performance depends on your hardware
+
+## Self Hosted Runners Setup
+They can be:
+- Physical machines
+- Virtual machines
+- Containers
+- On-premises
+- Cloud
+
+You can add self-hosted runner at various levels in the management hierarchy:
+- Repository Level
+- - dedicated to a single repository
+- Organization Level
+- - shared across multiple repositories
+- Enterprise Level
+- - shared across multiple organizations
+
+To setup self-hosted you need to add a runner and install the GitHub Actions Runner to connect the external compute to the external self-hosted runner
