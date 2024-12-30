@@ -16,3 +16,11 @@ jobs:
                 echo "This is another command inside the group"
                 echo "This is the last command inside the group"
                 echo "::endgroup::"
+
+            - name: step 1
+              run: |
+                echo "MY_VALUE=123" >> $GITHUB_ENV
+            - name: step 2
+              run: |
+                echo "MY_VALUE=$MY_VALUE"
+                
