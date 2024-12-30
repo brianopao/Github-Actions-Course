@@ -57,7 +57,7 @@ jobs:
             run: echo "This step will always run"
 ```
 
-## Triggering Single or Multiple Events
+### Triggering Single or Multiple Events
 
 ### Single Event
 
@@ -216,4 +216,47 @@ if: ${{ ! startsWith(github.ref, 'refs/tags/v') }}
 - `success` : True if the previous step succeeded
 - `skipped` : True if the previous step was skipped
 - `timedout` : True if the previous step timed out
-- `neutral` : True if the previous step was neutral
+- `neutral` : True if the previous step was 
+
+## Runners
+
+The Runner **determines the underlying computer and OS** that the workflow will run on
+
+The runner can be:
+- GitHub-hosted runner - GitHub provides runtime environments
+- - Standard Size
+- - - Linus, ubuntu, Windows
+- - - MacOS
+- - Larger Size
+- - - Only available for organizations and enterprise using the GitHub Team or Github Enterprise Cloud plans
+- - - More RAM, CPU, and storage
+- Self-hosted - External compute connected to GitHub using the GitHub Actions self-hosted runner application
+
+```yml
+runs-on: ubuntu-latest
+runs-on: windows-latest
+runs-on: macos-latest
+
+
+runs-on: [macos-14, macos-13, macos-12]
+
+runs-on: self-hosted
+```
+
+### GitHub-Hosted Runners
+- No setup required; fully managed by GitHub
+- Free with limits on usage; ch
+- Automatically scales based on demand
+- Predefined environments with limited control
+- Windows, Linux, MacOS
+- Secure but runs in a shared environment
+- Fixed performance capabilities
+  
+
+### Self-Hosted Runners
+- Requires setup and maintenance
+- No additional cost; you provide the hardware
+- Full control over the environment
+- Any OS, any hardware
+- Potentially more secure, but you are responsible for security
+- Performance depends on your hardware
