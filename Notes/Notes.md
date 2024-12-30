@@ -278,3 +278,80 @@ You can add self-hosted runner at various levels in the management hierarchy:
 - - shared across multiple organizations
 
 To setup self-hosted you need to add a runner and install the GitHub Actions Runner to connect the external compute to the external self-hosted runner
+
+
+## Worflow Commands
+Actions can communicate with the runner machine to set environment variables, output values used by other actions, add debug messages to the log, and other tasks
+
+**Set Env Vars**
+set an environment variables that will be available to subsequent actions in the job
+
+```yml
+steps:
+    - name: Set an environment variable
+      run: echo "::ACTION_ENV=production" >> $GITHUB_ENV
+```
+
+**Adding to System Path**
+Add a directory to the system PATH for subsequent steps in the job
+
+```yml
+steps:
+    - name: Add directory to PATH
+      run: echo "/pth/to/dir" >> $GITHUB_PATH
+```
+
+**Setting Output Variables**
+Set outputs that can be used by other jobs in a multi-job workflow
+
+```yml
+steps:
+    - name: Set output
+      id: exmaple-step
+      run: echo "result=output_value" >> $GITHUB_OUTPUT
+
+    - name: Use Output
+      run: echo "The output was ${{ steps.example-step.outputs.result }}"
+```
+
+**Debug Messages**
+Add debug messages to the log
+
+```yml
+steps:
+    - name: Debug message
+      run: echo "::debug::This is a debug message"
+```
+
+**Grouping Log Messages**
+Makes logs easier to read by grouping messages together
+
+```yml
+steps:
+    - name: Group messages
+      run: echo "::group::My Group"
+    - name: Step 1
+      run: echo "This is step 1"
+    - name: Step 2
+      run: echo "This is step 2"
+    - name: End Group
+      run: echo "::endgroup::"
+```
+
+**Masking Values in Logs**
+Prevent sensitive information from being printed in logs
+
+```yml
+steps:
+    - name: Mask a value
+      run: echo "::add-mask::${{ secrets.SECRET_VALUE }}"
+``` 
+
+**Stopping Failing Actions**
+Can force a workflow to stop and fail using the error command
+
+```yml
+steps:
+    - name: Fail the workflow
+      run: echo "::error::This workflow has failed"
+```
