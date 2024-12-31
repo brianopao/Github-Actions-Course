@@ -1,0 +1,24 @@
+name: Dependant Jobs Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    job2:
+        needs: job1
+        runs-on: ubuntu-latest
+        steps:
+            - name: Step A - Checkout code
+              uses: actions/checkout@v2
+            - name: Step B Run job2
+              run: echo "Job2 is running"
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Step C - Checkout code
+              uses: actions/checkout@v2
+            - name: Step D - Run job1
+              run: echo "Job1 is running"
+    

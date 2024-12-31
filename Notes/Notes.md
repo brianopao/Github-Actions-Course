@@ -381,3 +381,25 @@ You can access contexts using the expression syntax `${{ }}`
 **strategy** - Contains information about the matrix strategy
 
 **matrix** - Contains information about the matrix strategy
+
+## Dependant Jobs
+A workflow run is made up of one or more jobs, which run in parallel by default. To run jobs sequentially, you can define dependencies on other jobs using:
+
+- **job.<job_id>.needs** - a list of job IDs that must complete successfully before the job will run
+
+- ****job.<job_id>.if** - a conditional expression that must be true for the job to run
+
+```yml
+jobs:
+    job1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Step 1
+              run: echo "This is step 1"
+    job2:
+        runs-on: ubuntu-latest
+        needs: job1
+        steps:
+            - name: Step 2
+              run: echo "This is step 2"
+```
