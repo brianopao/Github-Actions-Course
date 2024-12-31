@@ -355,3 +355,29 @@ steps:
     - name: Fail the workflow
       run: echo "::error::This workflow has failed"
 ```
+
+
+## Workflow Context
+**Context** are **a way to access information** about workflow runs, variables, runner environments, jobs, and steps. Each context is an object that contains properties, which can be strings or other objects
+
+You can access contexts using the expression syntax `${{ }}`
+
+**github** - info about the event that triggered the workflow run
+
+**env** - Contains variables set in a workflow, job, or step
+
+**vars** - Contains variables set at the repository, organization, or enterprise level
+
+**job** - Contains information about the job that is running
+
+**jobs** - For reusable workflows only, contains output of jobs from the reusable workflow
+
+**steps** - information about the steps that is running the current job
+
+**runner** - information about the runner that is running the job
+
+**secrets** - Contains secrets set in the repository
+
+**strategy** - Contains information about the matrix strategy
+
+**matrix** - Contains information about the matrix strategy
